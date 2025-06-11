@@ -1,10 +1,12 @@
 services:
   # Serviço 1: Banco de Dados PostgreSQL
-  - type: pserv
+  - type: pserv # Início da definição do serviço de banco de dados
     name: locker-db-postgres
     runtime: postgres
     plan: free
+    # A chave 'postgres' deve estar neste mesmo nível de indentação de 'name', 'runtime', etc.
     postgres:
+      # A chave 'version' é uma propriedade de 'postgres' e deve estar indentada para dentro.
       version: "15"
 
   # Serviço 2: Aplicação Spring Boot (Web Service)
@@ -12,15 +14,11 @@ services:
     name: locker-service-api
     runtime: docker
     plan: free
-
-
     dockerfilePath: ./Dockerfile
-
-
     envVars:
       - key: DB_URL
         fromDatabase:
-          name: locker-db-postgres
+          name: locker-db-postgres # Deve ser o mesmo nome do serviço de banco de dados acima
           property: connectionString
       - key: DB_USERNAME
         fromDatabase:
