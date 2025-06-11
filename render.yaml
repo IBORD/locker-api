@@ -3,7 +3,7 @@ services:
   - type: pserv
     name: locker-db-postgres
     runtime: postgres
-    plan: free # Usa o plano gratuito do Render
+    plan: free
     postgres:
       version: "15"
 
@@ -11,15 +11,17 @@ services:
   - type: web
     name: locker-service-api
     runtime: docker
-    plan: free # Usa o plano gratuito do Render
+    plan: free
+
+
     dockerfilePath: ./Dockerfile
+
+
     envVars:
-      # Render injeta a URL do banco de dados automaticamente
       - key: DB_URL
         fromDatabase:
-          name: locker-db-postgres # Nome do serviço de banco de dados definido acima
+          name: locker-db-postgres
           property: connectionString
-      # As outras credenciais também são injetadas
       - key: DB_USERNAME
         fromDatabase:
           name: locker-db-postgres
@@ -28,6 +30,5 @@ services:
         fromDatabase:
           name: locker-db-postgres
           property: password
-      # Garante que a aplicação use o perfil 'production' do Spring se necessário
       - key: SPRING_PROFILES_ACTIVE
         value: production
