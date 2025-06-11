@@ -41,16 +41,20 @@ INSERT INTO CLIENTES (nome, email, telefone) VALUES
                                                  ('Carla Dias', 'carla.dias@example.com', NULL),
                                                  ('Daniel Farias', 'daniel.farias@example.com', '(31) 93333-3333');
 
--- Dados iniciais para a tabela ALUGUEIS
+-- Dados iniciais para a tabela ALUGUEIS (com datas estáticas para maior compatibilidade)
 
+-- Aluguel ATIVO para o cliente 'Bruno Costa' (ID 2) no armário 'GRU-T2-A02' (ID 2)
 INSERT INTO ALUGUEIS (cliente_id, armario_id, data_hora_inicio, codigo_acesso, status, preco) VALUES
-    (2, 2, NOW() - INTERVAL '3 hour', 'AB12C3', 'ATIVO', 0.00);
+    (2, 2, '2025-06-11 10:00:00', 'AB12C3', 'ATIVO', 0.00);
 
+-- Aluguel ATIVO para o cliente 'Carla Dias' (ID 3) no armário 'SE-LV-P01' (ID 7)
 INSERT INTO ALUGUEIS (cliente_id, armario_id, data_hora_inicio, codigo_acesso, status, preco) VALUES
-    (3, 7, NOW() - INTERVAL '1 day', 'FG56H7', 'ATIVO', 0.00);
+    (3, 7, '2025-06-10 14:30:00', 'FG56H7', 'ATIVO', 0.00);
 
+-- Aluguel CONCLUÍDO para a cliente 'Ana Paula' (ID 1) em um armário agora disponível
 INSERT INTO ALUGUEIS (cliente_id, armario_id, data_hora_inicio, data_hora_fim, codigo_acesso, status, preco) VALUES
-    (1, 6, NOW() - INTERVAL '2 day', NOW() - INTERVAL '1 day', 'JK89L0', 'CONCLUIDO', 25.00);
+    (1, 6, '2025-06-09 08:00:00', '2025-06-10 18:00:00', 'JK89L0', 'CONCLUIDO', 25.00);
 
+-- Aluguel ATIVO para o cliente 'Daniel Farias' (ID 4) no armário 'RT-P25-B' (ID 12)
 INSERT INTO ALUGUEIS (cliente_id, armario_id, data_hora_inicio, codigo_acesso, status, preco) VALUES
-    (4, 12, NOW() - INTERVAL '8 hour', 'MN23P4', 'ATIVO', 0.00);
+    (4, 12, '2025-06-11 02:15:00', 'MN23P4', 'ATIVO', 0.00);
