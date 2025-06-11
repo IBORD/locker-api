@@ -2,7 +2,6 @@ services:
   # Serviço 1: Banco de Dados PostgreSQL
   - type: pserv
     name: locker-db-postgres
-    # A linha 'runtime: postgres' foi REMOVIDA daqui
     plan: free
     postgres:
       version: "15"
@@ -10,21 +9,31 @@ services:
   # Serviço 2: Aplicação Spring Boot (Web Service)
   - type: web
     name: locker-service-api
-    runtime: docker # 'runtime' é usado aqui, para o serviço web
+    runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: DB_URL
-        fromDatabase:
-          name: locker-db-postgres
-          property: connectionString
-      - key: DB_USERNAME
+
+      # 1. Construímos a URL JDBC manualmente usando a interpolação de serviços do Render.
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${locker-db-postgres.host}:${locker-db-postgres.port}/${locker-db-postgres.database}
+
+      # 2. Mapeamos o usuário do banco de dados do Render.
+      - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: locker-db-postgres
           property: user
-      - key: DB_PASSWORD
+
+      # 3. Mapeamos a senha do banco de dados do Render.
+      - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
           name: locker-db-postgres
           property: password
+
+      # 4. (Opcional, mas boa prática) Definimos explicitamente o driver.
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
+
+      # 5. Mantemos o perfil de produção.
       - key: SPRING_PROFILES_ACTIVE
         value: production
