@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta Excluída</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #dc3545; color: #ffffff; padding: 15px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; line-height: 1.6; }
+        .content p { margin-bottom: 15px; }
+        .footer { text-align: center; padding: 15px; font-size: 12px; color: #777; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Notificação de Exclusão de Conta</h1>
+    </div>
+    <div class="content">
+        <p>Olá **{NOME_CLIENTE}**,</p>
+        <p>Confirmamos que sua conta em nosso serviço de Guarda-Volumes do Zé foi excluída do nosso sistema em **{DATA_EXCLUSAO}**.</p>
+        <p>Todos os seus dados pessoais associados à sua conta foram removidos conforme nossos termos de serviço e políticas de privacidade.</p>
+        <p>Lamentamos ver você partir. Se você mudou de ideia ou acredita que isso foi um engano, por favor, entre em contato com nosso suporte o mais breve possível.</p>
+        <p>Agradecemos pelo tempo que esteve conosco.</p>
+        <p>Atenciosamente,</p>
+        <p><strong>Equipe Guarda-Volumes do Zé</strong></p>
+    </div>
+    <div class="footer">
+        <p>&copy; **{ANO_ATUAL}** Guarda-Volumes do Zé. Todos os direitos reservados.</p>
+        <p>Este é um e-mail automático, por favor, não responda.</p>
+    </div>
+</div>
+</body>
+</html>

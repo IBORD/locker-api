@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Aluguel foi Confirmado!</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 0; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #28a745; color: #ffffff; padding: 20px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        .header h1 { margin: 0; font-size: 26px; }
+        .content { padding: 25px; line-height: 1.6; }
+        .content h2 { color: #007bff; }
+        .content p { margin-bottom: 15px; }
+        .rental-details { background-color: #f9f9f9; border: 1px solid #eee; border-radius: 5px; padding: 20px; margin-top: 20px; }
+        .rental-details strong { display: inline-block; width: 150px; }
+        .access-code { text-align: center; margin: 25px 0; }
+        .access-code span { display: inline-block; font-size: 32px; font-weight: bold; color: #dc3545; letter-spacing: 5px; border: 2px dashed #dc3545; padding: 15px 25px; border-radius: 5px; }
+        .footer { text-align: center; padding: 15px; font-size: 12px; color: #777; background-color: #f2f2f2; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Aluguel Confirmado!</h1>
+    </div>
+    <div class="content">
+        <p>Olá <strong>**{NOME_CLIENTE}**</strong>,</p>
+        <p>Ótima notícia! Seu aluguel de armário foi confirmado com sucesso. Abaixo estão os detalhes e o seu código de acesso.</p>
+
+        <div class="rental-details">
+            <h2>Detalhes do seu Aluguel</h2>
+            <p><strong>Localização:</strong> **{NOME_LOCALIZACAO}**</p>
+            <p><strong>Detalhes do Local:</strong> **{DESCRICAO_LOCALIZACAO}**</p>
+            <p><strong>Número do Armário:</strong> **{NUMERO_ARMARIO}**</p>
+            <p><strong>Início do Aluguel:</strong> **{DATA_INICIO}**</p>
+        </div>
+
+        <div class="access-code">
+            <p>Use o código abaixo para acessar seu armário:</p>
+            <span>**{CODIGO_ACESSO}**</span>
+        </div>
+
+        <p>Guarde este e-mail em um local seguro. Se tiver qualquer problema, entre em contato com nosso suporte.</p>
+        <p>Atenciosamente,</p>
+        <p><strong>Equipe Guarda-Volumes XYZ</strong></p>
+    </div>
+    <div class="footer">
+        <p>&copy; **{ANO_ATUAL}** Guarda-Volumes XYZ. Todos os direitos reservados.</p>
+    </div>
+</div>
+</body>
+</html>

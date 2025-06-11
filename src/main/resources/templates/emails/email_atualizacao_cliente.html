@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Cadastrais Atualizados</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #17a2b8; color: #ffffff; padding: 15px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; line-height: 1.6; }
+        .content p { margin-bottom: 15px; }
+        .highlight { color: #17a2b8; font-weight: bold; }
+        .footer { text-align: center; padding: 15px; font-size: 12px; color: #777; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Atualização de Dados Cadastrais</h1>
+    </div>
+    <div class="content">
+        <p>Olá **{NOME_CLIENTE}**,</p>
+        <p>Informamos que seus dados cadastrais em nosso serviço de guarda-volumes foram atualizados em <span class="highlight">**{DATA_ATUALIZACAO}**</span>.</p>
+        <p>As seguintes informações foram alteradas (ou confirmadas):</p>
+        <ul>
+            <li><strong>Nome:</strong> **{NOME_CLIENTE_NOVO}**</li>
+            <li><strong>E-mail:</strong> **{EMAIL_CLIENTE_NOVO}**</li>
+            <li><strong>Telefone:</strong> **{TELEFONE_CLIENTE_NOVO}**</li>
+        </ul>
+        <p>Se você não reconhece esta alteração ou acredita que foi um engano, por favor, entre em contato conosco imediatamente através dos nossos canais de suporte.</p>
+        <p>Atenciosamente,</p>
+        <p><strong>Equipe Guarda-Volumes do Zé</strong></p>
+    </div>
+    <div class="footer">
+        <p>&copy; **{ANO_ATUAL}** Guarda-Volumes do Zé. Todos os direitos reservados.</p>
+        <p>Este é um e-mail automático, por favor, não responda.</p>
+    </div>
+</div>
+</body>
+</html>
