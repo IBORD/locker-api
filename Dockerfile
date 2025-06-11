@@ -1,19 +1,16 @@
-# Usa uma imagem do Maven para compilar o projeto e gerar o arquivo .jar
-FROM maven:3.8-openjdk-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+FROM ubuntu:latest AS build
 
-# Usa uma imagem Java mínima para rodar a aplicação, resultando em uma imagem final menor
-FROM eclipse-temurin:17-jre-jammy
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
 
-# Copia o arquivo .jar gerado no estágio de build
-COPY --from=build /app/target/locker-service-api-ptbr-0.0.1-SNAPSHOT.jar app.jar
+RUN apt-get install maven -y
+RUN mvn clean install
 
-# Expõe a porta que a aplicação vai usar (o Render define a variável PORT)
+FROM openjdk:17-jdk-slim
+
 EXPOSE 8080
 
-# Comando para iniciar a aplicação quando o contêiner for executado
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /target/locker-service-api-ptbr-0.0.1-SNAPSHOT.jar app.jar
+
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
