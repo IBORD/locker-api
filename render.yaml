@@ -13,27 +13,27 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
+      # --- CORREÇÃO FINAL ---
+      # Usando as variáveis padrão do Spring e a connection string interna do Render
 
-      # 1. Construímos a URL JDBC manualmente usando a interpolação de serviços do Render.
+      # O Render fornece uma URL de conexão interna já compatível com JDBC.
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://${locker-db-postgres.host}:${locker-db-postgres.port}/${locker-db-postgres.database}
+        fromDatabase:
+          name: locker-db-postgres
+          property: internalConnectionString
 
-      # 2. Mapeamos o usuário do banco de dados do Render.
+      # Mapeamos o usuário do banco de dados do Render.
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: locker-db-postgres
           property: user
 
-      # 3. Mapeamos a senha do banco de dados do Render.
+      # Mapeamos a senha do banco de dados do Render.
       - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
           name: locker-db-postgres
           property: password
 
-      # 4. (Opcional, mas boa prática) Definimos explicitamente o driver.
+      # (Opcional, mas boa prática) Definimos explicitamente o driver.
       - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
         value: org.postgresql.Driver
-
-      # 5. Mantemos o perfil de produção.
-      - key: SPRING_PROFILES_ACTIVE
-        value: production
