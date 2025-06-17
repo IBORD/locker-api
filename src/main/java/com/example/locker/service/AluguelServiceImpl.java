@@ -11,9 +11,11 @@ import com.example.locker.enums.StatusAluguel;
 import com.example.locker.enums.StatusArmario;
 import com.example.locker.exception.ConflitoDeRecursoException;
 import com.example.locker.exception.RecursoNaoEncontradoException;
+import com.example.locker.exception.RegraDeNegocioException;
 import com.example.locker.repository.AluguelRepository;
 import com.example.locker.repository.ArmarioRepository;
 import com.example.locker.repository.ClienteRepository;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +32,14 @@ public class AluguelServiceImpl implements AluguelService {
     private final ArmarioRepository armarioRepository;
     private final ClienteRepository clienteRepository;
     private final EmailService emailService;
+    private final UsuarioService usuarioService;
 
-    public AluguelServiceImpl(AluguelRepository aluguelRepository, ArmarioRepository armarioRepository, ClienteRepository clienteRepository, EmailService emailService) {
+    public AluguelServiceImpl(AluguelRepository aluguelRepository, ArmarioRepository armarioRepository, ClienteRepository clienteRepository, EmailService emailService, UsuarioService usuarioService) {
         this.aluguelRepository = aluguelRepository;
         this.armarioRepository = armarioRepository;
         this.clienteRepository = clienteRepository;
         this.emailService = emailService;
+        this.usuarioService = usuarioService;
     }
 
 
@@ -125,9 +129,20 @@ public class AluguelServiceImpl implements AluguelService {
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> buscarAlugueisPorCliente(Long clienteId) {
-        if (!clienteRepository.existsById(clienteId)) {
-            throw new RecursoNaoEncontradoException("Cliente não encontrado com ID: " + clienteId);
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado com ID: " + clienteId));
+
+        try {
+            String emailClienteSolicitado = cliente.getEmail();
+            String loginUsuarioLogado = usuarioService.getLoggedUser().getLogin();
+
+            if (!loginUsuarioLogado.equals(emailClienteSolicitado)) {
+                throw new AccessDeniedException("Acesso negado. Você não pode visualizar aluguéis de outro cliente.");
+            }
+        } catch (RegraDeNegocioException e) {
+            throw new AccessDeniedException("Acesso negado. Não foi possível verificar a identidade do usuário.");
         }
+
         return aluguelRepository.findByClienteId(clienteId)
                 .stream()
                 .map(this::paraDTORico)

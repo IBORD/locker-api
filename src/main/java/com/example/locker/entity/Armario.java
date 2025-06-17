@@ -3,7 +3,7 @@ package com.example.locker.entity;
 import com.example.locker.enums.TamanhoArmario;
 import com.example.locker.enums.StatusArmario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;

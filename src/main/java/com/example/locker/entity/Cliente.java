@@ -1,9 +1,10 @@
 package com.example.locker.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor

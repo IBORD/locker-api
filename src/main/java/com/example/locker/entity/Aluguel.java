@@ -1,7 +1,7 @@
 package com.example.locker.entity;
 
 import com.example.locker.enums.StatusAluguel;
-import jakarta.persistence.*; // Import correto
+import javax.persistence.*; // Import correto
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;

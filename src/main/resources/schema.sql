@@ -3,6 +3,34 @@ DROP TABLE IF EXISTS ALUGUEIS CASCADE;
 DROP TABLE IF EXISTS ARMARIOS CASCADE;
 DROP TABLE IF EXISTS CLIENTES CASCADE;
 DROP TABLE IF EXISTS LOCALIZACOES CASCADE;
+DROP TABLE IF EXISTS USUARIO_CARGO CASCADE;
+DROP TABLE IF EXISTS CARGO CASCADE;
+DROP TABLE IF EXISTS USUARIO CASCADE;
+
+
+CREATE TABLE USUARIO (
+                         id_usuario SERIAL PRIMARY KEY,
+                         login VARCHAR(255) UNIQUE NOT NULL,
+                         senha VARCHAR(255) NOT NULL
+);
+
+
+
+-- Tabela de Cargos (Roles)
+CREATE TABLE CARGO (
+                       id_cargo SERIAL PRIMARY KEY,
+                       nome VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Tabela de Junção Usuario-Cargo
+CREATE TABLE USUARIO_CARGO (
+                               id_usuario INT NOT NULL,
+                               id_cargo INT NOT NULL,
+                               PRIMARY KEY (id_usuario, id_cargo),
+                               CONSTRAINT fk_usuario_cargo_usuario FOREIGN KEY (id_usuario) REFERENCES USUARIO (id_usuario),
+                               CONSTRAINT fk_usuario_cargo_cargo FOREIGN KEY (id_cargo) REFERENCES CARGO (id_cargo)
+);
+
 
 -- Tabela de Localizações
 CREATE TABLE LOCALIZACOES (

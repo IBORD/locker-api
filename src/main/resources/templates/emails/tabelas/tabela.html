@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Permissões da API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .table-header-group th {
+            position: sticky;
+            top: 0;
+            background-color: #f1f5f9;
+            z-index: 10;
+        }
+        .icon-allowed {
+            color: #22c55e; /* green-500 */
+        }
+        .icon-denied {
+            color: #ef4444; /* red-500 */
+        }
+        .icon-public {
+            color: #3b82f6; /* blue-500 */
+        }
+        .category-row {
+            background-color: #e2e8f0; /* slate-200 */
+        }
+        .table-fixed {
+            table-layout: fixed;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-700">
+
+<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <header class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">Matriz de Permissionamento da API</h1>
+        <p class="mt-2 text-lg text-slate-600">Visão geral dos direitos de acesso por papel de usuário.</p>
+    </header>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+        <table class="w-full text-sm sm:text-base text-left">
+            <thead class="table-header-group text-xs text-slate-700 uppercase">
+            <tr>
+                <th scope="col" class="px-6 py-4 w-2/6">Recurso (Endpoint)</th>
+                <th scope="col" class="px-6 py-4 w-2/6">Ação</th>
+                <th scope="col" class="px-6 py-4 text-center w-1/6">
+                    <i class="fa-solid fa-user-shield mr-2"></i>ADMIN
+                </th>
+                <th scope="col" class="px-6 py-4 text-center w-1/6">
+                    <i class="fa-solid fa-user mr-2"></i>USUÁRIO
+                </th>
+                <th scope="col" class="px-6 py-4 text-center w-1/6">
+                    <i class="fa-solid fa-globe mr-2"></i>Público
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Categoria: Autenticação -->
+            <tr class="category-row font-semibold text-slate-800">
+                <td colspan="5" class="px-6 py-3">
+                    <i class="fa-solid fa-key mr-2"></i>Autenticação e Acesso Pessoal
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/auth</td>
+                <td class="px-6 py-4">Login (obter token)</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-public fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/auth/criar</td>
+                <td class="px-6 py-4">Criar novo usuário do sistema</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/auth-controller</td>
+                <td class="px-6 py-4">gerenciar autenticações</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">PUT /auth/trocar-senha</td>
+                <td class="px-6 py-4">Trocar a própria senha</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/swagger-ui/**</td>
+                <td class="px-6 py-4">Documentação da API</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-public fa-lg"></i></td>
+            </tr>
+
+            <!-- Categoria: Consulta de Dados -->
+            <tr class="category-row font-semibold text-slate-800">
+                <td colspan="5" class="px-6 py-3">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Consulta de Dados
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">GET /api/v1/localizacoes/**</td>
+                <td class="px-6 py-4">Ver localizações disponíveis</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">GET /api/v1/armarios/**</td>
+                <td class="px-6 py-4">Ver armários disponíveis</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+
+            <!-- Categoria: Clientes -->
+            <tr class="category-row font-semibold text-slate-800">
+                <td colspan="5" class="px-6 py-3">
+                    <i class="fa-solid fa-users-gear mr-2"></i>Gerenciamento de Clientes (Admin)
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">POST /api/v1/clientes</td>
+                <td class="px-6 py-4">Criar um novo cliente</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">GET /api/v1/clientes/**</td>
+                <td class="px-6 py-4">Ver dados de todos os clientes</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">PUT /api/v1/clientes/{id}</td>
+                <td class="px-6 py-4">Atualizar um cliente</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">DELETE /api/v1/clientes/{id}</td>
+                <td class="px-6 py-4">Desativar um cliente</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+
+            <!-- Categoria: Gestão do Sistema -->
+            <tr class="category-row font-semibold text-slate-800">
+                <td colspan="5" class="px-6 py-3">
+                    <i class="fa-solid fa-cogs mr-2"></i>Gestão do Sistema (Admin)
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/api/v1/alugueis/**</td>
+                <td class="px-6 py-4">Gerenciar Aluguéis</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">POST, PUT, DELETE /api/v1/localizacoes/**</td>
+                <td class="px-6 py-4">Gerenciar Localizações</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white border-b border-slate-200 hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">POST, PUT, PATCH, DELETE /api/v1/armarios/**</td>
+                <td class="px-6 py-4">Gerenciar Armários</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            <tr class="bg-white hover:bg-slate-50">
+                <td class="px-6 py-4 font-medium">/api/v1/relatorios/**</td>
+                <td class="px-6 py-4">Gerar Relatórios</td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-check-circle icon-allowed fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+                <td class="px-6 py-4 text-center"><i class="fas fa-times-circle icon-denied fa-lg"></i></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="text-center mt-8 text-sm text-slate-500">
+        <p>&copy; 2024 LockerService API. Todos os direitos reservados.</p>
+    </footer>
+</div>
+</body>
+</html>
